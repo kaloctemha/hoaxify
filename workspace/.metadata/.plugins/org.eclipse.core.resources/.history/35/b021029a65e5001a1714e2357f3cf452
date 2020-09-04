@@ -1,0 +1,68 @@
+package com.hoaxify.ws.Configuration;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	UserAuthService userAuthSvc;
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		// Spring default olarka csrf - cross side request forgery ' yi enable eder.
+		// Client post attiginda req icinde bir de gizli token olur, aslinda bu bi
+		// guvenlik kontroludu.
+		// O request'in kullanicinin kendi aksiyonlariyla gonderildigini garanti etmek
+		// gibi bir seydir
+		http.csrf().disable();
+		
+		// AuthController.java'da gelen req in authentication cridential'lari ile geldiginden
+		// emin olmak icin handleAuthentication() icerisinde  bir suru is yaptik. 
+		// Simdi amac bu isi Spring'e yaptirmak, bu durumda @PostMapping("/api/1.0/auth")'a gelen
+		// butun req lerin authenticated bir sekilde gelmesi gerektigini Spring'e soylememiz gerekiyor.
+		// Yani spring gelen req'i bize ulasmadan arkada authenticate edeek.
+		http.httpBasic().authenticationEntryPoint(new AuthenticationEntryPoint() {
+
+			@Override
+			public void commence(HttpServletRequest request, HttpServletResponse response,
+					AuthenticationException authException) throws IOException, ServletException {
+				response.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+			}
+		});
+		
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
+								.antMatchers(HttpMethod.GET, "/secured").authenticated()
+								.and().authorizeRequests().anyRequest().permitAll();
+	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// Spring e diyoruz ki eger bir user arayacaksan, benim UserAuthService imi kullan
+		auth.userDetailsService(userAuthSvc);
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+}

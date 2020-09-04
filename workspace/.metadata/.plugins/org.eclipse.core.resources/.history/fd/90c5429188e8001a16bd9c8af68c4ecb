@@ -1,0 +1,44 @@
+package com.hoaxify.ws.error;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
+
+
+// Spring in basic errorcontroller ini ezmek icin kendi error controller imizi yazdik ki ApiError'u kullanabilelim
+@RestController
+public class ErrorHandler implements ErrorController {
+	
+	@Autowired
+	private ErrorAttributes errorAttributes;
+	
+	@RequestMapping("/error")
+	ApiError handleError(WebRequest webRequest) {
+		Map<String, Object> attributeMap = this.errorAttributes.getErrorAttributes(webRequest, true);
+		String message = (String) attributeMap.get("message");
+		String path = (String) attributeMap.get("path");
+		int statusCode = (int) attributeMap.get("status");
+		List<FieldError> fieldErrors = (List<FieldError>) attributeMap.get("errors");
+		Map<String, String> validationErrors = new HashMap<>();
+
+		for (FieldError fieldError : fieldErrors) {
+			validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+		ApiError apiError = new ApiError(statusCode, message, path)
+		return apiError;
+	}
+
+	@Override
+	public String getErrorPath() {
+		return "/error";
+	}
+
+}

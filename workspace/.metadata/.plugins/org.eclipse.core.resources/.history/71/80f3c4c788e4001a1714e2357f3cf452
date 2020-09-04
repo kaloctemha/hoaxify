@@ -1,0 +1,14 @@
+package com.hoaxify.ws.shared;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class DummyController {
+	
+	
+	
+	public DummyController() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
