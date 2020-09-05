@@ -12,8 +12,7 @@ function getDisplayName(WrappedComponent){
 export function withApiProgress(WrappedComponent, apiPath) {
     return class extends Component {
         // String template :  back tick `` icerisinde yapilir <-- 
-        static displayName = `ApiProgress(${getDisplayName(WrappedComponent)})`
-
+        static displayName = `ApiProgress(${getDisplayName(WrappedComponent)})`;
 
         //static displayName = 'ApiProgress (' + getDisplayName(WrappedComponent) +')';
 
@@ -21,13 +20,13 @@ export function withApiProgress(WrappedComponent, apiPath) {
             pendingAPICall: false
         }
         componentDidMount() {
-
-            axios.interceptors.request.use(request => {
+            this.requestInterceptor = axios.interceptors.request.use(request => {
+                console.log('Running req interceptor', apiPath);
                 this.updateApiCallFor(request.url, true);
                 return request;
             });
 
-            axios.interceptors.response.use(
+            this.responseInterceptor = axios.interceptors.response.use(
                 response => {
                     this.updateApiCallFor(response.config.url, false);
                     return response;
@@ -36,6 +35,13 @@ export function withApiProgress(WrappedComponent, apiPath) {
                     this.updateApiCallFor(error.config.url, false);
                     throw error;
                 });
+        }
+
+        // mount edilen interceptor in ID sini eject ile siliyoruz ki her requestte bunlari
+        // tutmasin memory leak sorunu yaratmasin
+        componentWillUnmount(){
+            axios.interceptors.request.eject(this.requestInterceptor);
+            axios.interceptors.request.eject(this.responseInterceptor);
         }
 
         updateApiCallFor = (url, inProgress) => {

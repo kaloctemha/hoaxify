@@ -11,7 +11,9 @@ i18n.use(initReactI18next).init({
                 'Display Name': 'Display Name',
                 'Password': 'Password',
                 'Password Repeat': 'Password Repeat',
-                'Login': 'Login'
+                'Login': 'Login',
+                'Home Page': 'Home Page'
+                
             }
         },
         tr: {
@@ -22,7 +24,8 @@ i18n.use(initReactI18next).init({
                 'Display Name': 'Goruntu Adi',
                 'Password': 'Sifre',
                 'Password Repeat': 'Sifre Tekrar',
-                'Login': 'Giris'
+                'Login': 'Giris',
+                'Home Page': 'Anasayfa'
             }
         }
     },

@@ -1,5 +1,0 @@
-package com.hoaxify.ws.Configuration;
-
-public class AuthenticationEntryPoint {
-
-}

@@ -1,7 +1,0 @@
-package com.hoaxify.ws.Configuration;
-
-import org.springframework.security.core.userdetails.UserDetails;
-
-public class HoaxifyUserDetails implements UserDetails{
-
-}

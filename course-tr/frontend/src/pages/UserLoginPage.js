@@ -46,9 +46,11 @@ class UserLoginPage extends React.Component {
         event.preventDefault();
         const { username, password } = this.state;
         const creds = { username, password };
+        const {push} = this.props.history;
         this.setState({ error: null }); // kullanici click yaptiktan sonra cevap gelene kadar hata mesajini(unauthrised) ortadan kaldiralim
         try {
             await login(creds);
+            push('/'); // login basarili ise homePage e dondurmeye calisiyoruz
         } catch (apiError) {
 
             this.setState({
