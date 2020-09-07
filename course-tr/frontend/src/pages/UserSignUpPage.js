@@ -14,7 +14,7 @@ import { withApiProgress } from '../shared/ApiProgress';
 class UserSignUpPage extends React.Component {
 
     state = {
-        userName: null,
+        username: null,
         //agreedClicked: false
         displayName: null,
         password: null,
@@ -57,11 +57,11 @@ class UserSignUpPage extends React.Component {
         event.preventDefault();
 
         //object destructuring
-        const { userName, displayName, password } = this.state;
+        const { username: username, displayName, password } = this.state;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
         const body = {
-            userName,
+            username: username,
             displayName,
             password
         };
@@ -153,7 +153,7 @@ class UserSignUpPage extends React.Component {
 
         // object destructuring
         const {errors } = this.state;
-        const { userName, displayName, password, passwordRepeat } = errors;
+        const { username, displayName, password, passwordRepeat } = errors;
         const { t , pendingAPICall} = this.props;
         // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
         // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
@@ -164,7 +164,7 @@ class UserSignUpPage extends React.Component {
                 <form>
                     <h1 className='text-center'>{t('Sign Up')}</h1>
                     {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
-                    <Input name="userName" label={t('Username')} error={userName} onChange={this.onChange} />
+                    <Input name="username" label={t('Username')} error={username} onChange={this.onChange} />
                     <Input name="displayName" label={t('Display Name')} error={displayName} onChange={this.onChange} />
                     <Input name="password" label={t('Password')} error={password} onChange={this.onChange} type="password" />
                     <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeat} onChange={this.onChange} type="password" />

@@ -12,33 +12,88 @@ import TopBar from '../components/TopBar';
 // JSX, React elementleri üretir.
 
 
-function App() {
-  return (
-    <div>
-      {/* HashRouter : her sayfa acildiginda backende request atmasin, frontend icinde sayfa switchleri yapilsin 
-      BrowserRouter'da her sayfada backend sorgulari yapiliyor, o daha karmasik bi yapi backend isleri gerekli*/}
-      <Router>
-        <TopBar />
-        {/* alttakilerden birini sec her sayfayi '/' a redirect etme */}
-        <Switch>
-          {/* React startswith ile calisir, o nedenle '/' gordugu her yerde HomePage gostermesin
-      diye exact yazdik */}
-          <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={UserLoginPage} />
-          <Route path="/signup" component={UserSignUpPage} />
-          <Route path="/user/:username" component={UserPage} />
-          <Redirect to="/" />
-        </Switch>
-      </Router>
-      {/* <div className="col">
-        <UserSignUpPage />
+class App extends React.Component {
+
+  // Aslinda bunu TopBar.java'da idi, Lifting State Up yaparak buraya tasidik.
+  // Amacimiz Login oldugu bilgisini hem Topbar hem de LoginPage'de kullanmak
+  state = {
+    username: undefined,
+    isLoggedIn: false
+  };
+
+  onLoginSuccess = (username) => {
+    this.setState(
+      {
+        username,
+        isLoggedIn: true
+      }
+    )
+  };
+
+  onLogOutSuccess = (username) => {
+    this.setState(
+      {
+        username: undefined,
+        isLoggedIn: false
+      }
+    )
+  }
+
+  render() {
+    const { isLoggedIn, username } = this.state;
+
+    return (
+      <div>
+        {/* HashRouter : her sayfa acildiginda backende request atmasin, frontend icinde sayfa switchleri yapilsin 
+        BrowserRouter'da her sayfada backend sorgulari yapiliyor, o daha karmasik bi yapi backend isleri gerekli*/}
+        <Router>
+          <TopBar username={username} isLoggedIn={isLoggedIn} onLogOutSuccess={this.onLogOutSuccess} />
+          {/* alttakilerden birini sec her sayfayi '/' a redirect etme */}
+          <Switch>
+            {/* React startswith ile calisir, o nedenle '/' gordugu her yerde HomePage gostermesin
+        diye exact yazdik */}
+            <Route exact path="/" component={HomePage} />
+
+
+            {/* Eger user login olmussa browserdan '/login' adresine gitmek istendiginde Topbarda 
+            login ve signup linkleri cikmasin diye !isLoggedIn ile sardik */}
+            {!isLoggedIn && (<Route path="/login"
+              component={
+                (props) => {
+                  // {...props} : spread operator ile App.js'deki butu property'leri 
+                  // return ederken UserLoginPage'e pasladik ki history gibi ozellikleri aktaralim
+                  // ayrica onLoginSuccess fonksiyonunu da bir property olarak UserLoginPage e verdik
+                  return <UserLoginPage onLoginSuccess={this.onLoginSuccess} {...props} />
+                }
+              }
+            />)
+            }
+
+
+            <Route path="/signup" component={UserSignUpPage} />
+
+            {/* App deki username asagida Userpage'e property olarak verdik,sonra UserPage'den de profileCarda property olarak vericez */}
+            <Route path="/user/:username"
+              component={
+                (props) => {
+                  return <UserPage {...props} username={username}/>
+                }
+              } />
+
+              {/* default */}
+            <Redirect to="/" />
+          </Switch>
+        </Router>
+        {/* <div className="col">
+          <UserSignUpPage />
+        </div>
+        <div className="col">
+          <UserLoginPage />
+        </div> */}
+        <LanguageSelector />
       </div>
-      <div className="col">
-        <UserLoginPage />
-      </div> */}
-      <LanguageSelector />
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

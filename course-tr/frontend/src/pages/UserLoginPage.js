@@ -13,7 +13,7 @@ class UserLoginPage extends React.Component {
         password: null,
         error: null
     };
-    
+
     // React in componentlerinin lifecycle'inda sayfa yuklenirken bu method cagirliyor.
     // bunu ApiProgress.js e tasiyip hem Login hem Signup icin kullandik
     // componentDidMount(){
@@ -35,7 +35,7 @@ class UserLoginPage extends React.Component {
     //         });
     // }
 
-    
+
 
     onChange = event => {
         const { name, value } = event.target;
@@ -46,11 +46,13 @@ class UserLoginPage extends React.Component {
         event.preventDefault();
         const { username, password } = this.state;
         const creds = { username, password };
-        const {push} = this.props.history;
+        const { push } = this.props.history;
+        const { onLoginSuccess } = this.props;
         this.setState({ error: null }); // kullanici click yaptiktan sonra cevap gelene kadar hata mesajini(unauthrised) ortadan kaldiralim
         try {
             await login(creds);
             push('/'); // login basarili ise homePage e dondurmeye calisiyoruz
+            onLoginSuccess(username);
         } catch (apiError) {
 
             this.setState({
@@ -62,7 +64,7 @@ class UserLoginPage extends React.Component {
 
     render() {
         // ApiProgress'de clone yapildi, o nedenle bu class'a pendingAPICall property olarak geliyor, props'dan alabiliriz
-        const { t, pendingAPICall } = this.props; 
+        const { t, pendingAPICall } = this.props;
         const { username, password, error } = this.state;
         const buttonEnabled = username && password;
 
@@ -75,13 +77,13 @@ class UserLoginPage extends React.Component {
                     <Input name="password" label={t('Password')} onChange={this.onChange} type="password" />
                     {/* hata mesajini eksrana bastirmak icin bir div ekliyoruz */}
                     {this.state.error && <div className="alert alert-danger" role="alert">
-                                        {this.state.error}</div>}
+                        {this.state.error}</div>}
                     <div className="text-center">
                         <ButtonWithProgress
                             onClick={this.onClickLogin}
                             disabled={!buttonEnabled || pendingAPICall}
-                            pendingAPICall= {pendingAPICall}
-                            text = {t('Login')}
+                            pendingAPICall={pendingAPICall}
+                            text={t('Login')}
                         />
                     </div>
                 </form>

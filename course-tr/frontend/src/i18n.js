@@ -12,7 +12,8 @@ i18n.use(initReactI18next).init({
                 'Password': 'Password',
                 'Password Repeat': 'Password Repeat',
                 'Login': 'Login',
-                'Home Page': 'Home Page'
+                'Home Page': 'Home Page',
+                'Logout' : 'Logout'
                 
             }
         },
@@ -25,7 +26,8 @@ i18n.use(initReactI18next).init({
                 'Password': 'Sifre',
                 'Password Repeat': 'Sifre Tekrar',
                 'Login': 'Giris',
-                'Home Page': 'Anasayfa'
+                'Home Page': 'Anasayfa',
+                'Logout' : 'Cikis'
             }
         }
     },

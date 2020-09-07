@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import ProfileCard from '../components/ProfileCard';
 
-class UserPage extends Component {
-    render() {
-        return (
-            <div className = 'container'>
-                User Page
-            </div>
-        );
-    }
+// App den aldigimiz username property sini ProfileCard a tasidik
+const UserPage = (props) => {
+    return (
+        <div className='container'>
+            <ProfileCard username = {props.username}/>
+        </div>
+    );
 }
 
 export default UserPage;
