@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="D:\Users\acolak\Desktop\xxx\SPRING\hoaxify\course-tr\ws"/>
+	</list>
 	<list key="installedFeatures">
 		<item value="com.ianbrandt.tools.m2e.mdp.feature:0.0.4.201409291703"/>
 		<item value="org.aspectj:1.9.2.201905102027"/>
@@ -82,13 +85,12 @@
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.1.0.201406251020"/>
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.15.1.201806191431"/>
-		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.5.202002191804"/>
+		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.4.201905300046"/>
 		<item value="org.springframework.ide.eclipse.ajdt.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.aop.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.autowire.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.batch.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.boot.dash.feature:3.9.9.201906180643-RELEASE"/>
-		<item value="org.springframework.ide.eclipse.boot.feature.source:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.boot.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.cft.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.data.feature:3.9.9.201906180643-RELEASE"/>
@@ -103,9 +105,23 @@
 		<item value="org.springsource.sts.package:3.9.9.201906181723-RELEASE-e411"/>
 		<item value="org.springsource.sts:3.9.9.201906181723-RELEASE"/>
 	</list>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\Users\acolak\Desktop\xxx\SPRING\hoaxify\course-tr\ws"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
+	</section>
 	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
 		<item key="ShowStatusLine" value="true"/>
-		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/UserController.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/error/ApiError.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/resources/application.yaml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/ws/src/main/java/com/hoaxify/ws/WsApplication.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
 		<item key="ShowDerived" value="false"/>
 		<item key="FilterByLocation" value="false"/>
 		<item key="WorkingSet" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;"/>
