@@ -85,13 +85,20 @@
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.1.0.201406251020"/>
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.15.1.201806191431"/>
+<<<<<<< HEAD
 		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.5.202002191804"/>
+=======
+		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.4.201905300046"/>
+>>>>>>> origin/master
 		<item value="org.springframework.ide.eclipse.ajdt.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.aop.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.autowire.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.batch.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.boot.dash.feature:3.9.9.201906180643-RELEASE"/>
+<<<<<<< HEAD
 		<item value="org.springframework.ide.eclipse.boot.feature.source:3.9.9.201906180643-RELEASE"/>
+=======
+>>>>>>> origin/master
 		<item value="org.springframework.ide.eclipse.boot.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.cft.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.data.feature:3.9.9.201906180643-RELEASE"/>
@@ -111,6 +118,7 @@
 		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="D:\Users\acolak\Desktop\xxx\SPRING\hoaxify\course-tr\ws"/>
 			<item value="D:\Users\acolak\Desktop\acolak\SPRING\course-tr\ws"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">

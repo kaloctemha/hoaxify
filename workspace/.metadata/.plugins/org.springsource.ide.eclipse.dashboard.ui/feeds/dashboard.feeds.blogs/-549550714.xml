@@ -5,6 +5,7 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
+<<<<<<< HEAD
   <updated>2020-09-11T15:00:00Z</updated>
   <entry>
     <title>You spoke, we listened: State of Spring 2020 report is here!</title>
@@ -560,6 +561,9 @@ PRIMARY KEY (id));&lt;/code&gt;&lt;/pre&gt;
 &lt;/ul&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
+=======
+  <updated>2020-09-07T12:00:00Z</updated>
+>>>>>>> origin/master
   <entry>
     <title>Azure in the Enterprise: Azure SQL Database Access and Spring Boot</title>
     <link rel="alternate" href="https://spring.io/blog/2020/09/07/azure-in-the-enterprise-azure-sql-database-access-and-spring-boot" />

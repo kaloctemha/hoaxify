@@ -237,15 +237,9 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_pw5X8MNwEeqyUKFLeQJWyg" elementId="org.eclipse.ui.editorss" selectedElement="_pw5X8cNwEeqyUKFLeQJWyg">
-      <children xsi:type="basic:PartStack" xmi:id="_pw5X8cNwEeqyUKFLeQJWyg" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_Ll8m0MNxEeqyUKFLeQJWyg">
+      <children xsi:type="basic:PartStack" xmi:id="_pw5X8cNwEeqyUKFLeQJWyg" elementId="org.eclipse.e4.primaryDataStack">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <children xsi:type="basic:Part" xmi:id="_Ll8m0MNxEeqyUKFLeQJWyg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="Dashboard" iconURI="platform:/plugin/org.springsource.ide.eclipse.commons.gettingstarted/icons/spring.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.springsource.ide.eclipse.commons.gettingstarted.dashboard.WelcomeDashboard&quot; name=&quot;Dashboard&quot; partName=&quot;Dashboard&quot; title=&quot;Dashboard&quot; tooltip=&quot;Dashboard&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.springsource.ide.eclipse.dashboard.ui.dashboard.elementFactory&quot; openDashboard=&quot;true&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.springsource.ide.eclipse.commons.gettingstarted.dashboard.WelcomeDashboard</tags>
-          <tags>removeOnHide</tags>
-        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_pxoXwMNwEeqyUKFLeQJWyg" elementId="org.eclipse.jdt.ui.PackageExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Package Explorer" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/eview16/package.png" tooltip="" closeable="true">
@@ -425,7 +419,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_pCVBwMNwEeqyUKFLeQJWyg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_zpieUPTDEeqMB5-dJafhgw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_n-09ZcNwEeqyUKFLeQJWyg"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_qcU0APGmEeqHQKoDbFndyQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_n-09ZcNwEeqyUKFLeQJWyg"/>
+>>>>>>> origin/master
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_pCVBwcNwEeqyUKFLeQJWyg" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -456,7 +454,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_pCW28MNwEeqyUKFLeQJWyg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_zpurkPTDEeqMB5-dJafhgw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_n-zvVcNwEeqyUKFLeQJWyg"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_qcelAPGmEeqHQKoDbFndyQ" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_n-zvVcNwEeqyUKFLeQJWyg"/>
+>>>>>>> origin/master
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_pCW28cNwEeqyUKFLeQJWyg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
