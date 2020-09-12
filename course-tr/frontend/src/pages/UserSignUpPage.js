@@ -34,14 +34,14 @@ class UserSignUpPage extends React.Component {
         // JS 'spread operator' to copy object
         // Bos bir field ile signup yaptiktan sonra, tekrar birseyler yazilmaya baslandiginda
         // hata mesajini silinmesi islemi icin
-        const errors = { ... this.state.errors }
+        const errors = { ...this.state.errors }
 
         errors[name] = undefined;
 
-        if (name == 'password' || name == 'passwordRepeat') {
-            if (name == 'password' && value != this.state.passwordRepeat) {
+        if (name === 'password' || name === 'passwordRepeat') {
+            if (name === 'password' && value !== this.state.passwordRepeat) {
                 errors.passwordRepeat = t('Password Mismatch');
-            } else if (name == 'passwordRepeat' && value != this.state.password) {
+            } else if (name === 'passwordRepeat' && value !== this.state.password) {
                 errors.passwordRepeat = t('Password Mismatch');
             } else {
                 errors.passwordRepeat = undefined;
@@ -175,7 +175,7 @@ class UserSignUpPage extends React.Component {
 
                     <div className="text-center">
                         <ButtonWithProgress
-                            disabled={pendingAPICall || passwordRepeat != undefined}
+                            disabled={pendingAPICall || passwordRepeat !== undefined}
                             pendingAPICall = {pendingAPICall}
                             onClick={this.onClickSignUp}
                             text =  {t("Sign Up")}

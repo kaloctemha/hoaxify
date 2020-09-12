@@ -14,40 +14,46 @@ import TopBar from '../components/TopBar';
 
 class App extends React.Component {
 
-  // Aslinda bunu TopBar.java'da idi, Lifting State Up yaparak buraya tasidik.
+  // Aslinda bu TopBar.java'da idi, Lifting State Up yaparak buraya tasidik.
   // Amacimiz Login oldugu bilgisini hem Topbar hem de LoginPage'de kullanmak
-  state = {
-    username: undefined,
-    isLoggedIn: false
-  };
+  // Simdi de AuthenticationContext e tasiyoruz ki surekli Lifting-State Up ile
+  // tasimak zorunda kalmayalim
+  // state = {
+  //   username: undefined,
+  //   isLoggedIn: false
+  // };
 
-  onLoginSuccess = (username) => {
-    this.setState(
-      {
-        username,
-        isLoggedIn: true
-      }
-    )
-  };
+  // onLoginSuccess = (username) => {
+  //   this.setState(
+  //     {
+  //       username,
+  //       isLoggedIn: true
+  //     }
+  //   )
+  // };
 
-  onLogOutSuccess = (username) => {
-    this.setState(
-      {
-        username: undefined,
-        isLoggedIn: false
-      }
-    )
-  }
+  // onLogOutSuccess = (username) => {
+  //   this.setState(
+  //     {
+  //       username: undefined,
+  //       isLoggedIn: false
+  //     }
+  //   )
+  // }
 
   render() {
-    const { isLoggedIn, username } = this.state;
+    const isLoggedIn = false;
+    const username = undefined;
 
     return (
       <div>
         {/* HashRouter : her sayfa acildiginda backende request atmasin, frontend icinde sayfa switchleri yapilsin 
         BrowserRouter'da her sayfada backend sorgulari yapiliyor, o daha karmasik bi yapi backend isleri gerekli*/}
         <Router>
-          <TopBar username={username} isLoggedIn={isLoggedIn} onLogOutSuccess={this.onLogOutSuccess} />
+        {/* AuthenticationContext'e ihtiyacimiz olan butun property leri verdigimiz icin
+        artik TopBar'dan bunlari kaldirabiliriz cunku aritk bunlari App.js'de en tepede render etcez */}
+          {/* <TopBar username={username} isLoggedIn={isLoggedIn} onLogOutSuccess={this.onLogOutSuccess} /> */}
+          <TopBar/>
           {/* alttakilerden birini sec her sayfayi '/' a redirect etme */}
           <Switch>
             {/* React startswith ile calisir, o nedenle '/' gordugu her yerde HomePage gostermesin

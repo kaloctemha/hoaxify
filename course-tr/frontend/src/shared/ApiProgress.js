@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
-function getDisplayName(WrappedComponent){
+function getDisplayName(WrappedComponent) {
     return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
@@ -39,13 +39,13 @@ export function withApiProgress(WrappedComponent, apiPath) {
 
         // mount edilen interceptor in ID sini eject ile siliyoruz ki her requestte bunlari
         // tutmasin memory leak sorunu yaratmasin
-        componentWillUnmount(){
+        componentWillUnmount() {
             axios.interceptors.request.eject(this.requestInterceptor);
             axios.interceptors.request.eject(this.responseInterceptor);
         }
 
         updateApiCallFor = (url, inProgress) => {
-            if (url == apiPath) {
+            if (url === apiPath) {
                 this.setState({ pendingAPICall: inProgress });
             }
         };
@@ -59,7 +59,7 @@ export function withApiProgress(WrappedComponent, apiPath) {
             // {... this.props}  -->  spread operator, this icindeki butun key/value lari pasliyoruz
             // Eger bir higher-order-component olusturuyorsak, sardigimiz component'a butun propertyleri
             // pasladigimizdan emin olmaliyiz
-            return <WrappedComponent pendingAPICall = {pendingAPICall} {... this.props}/>
+            return <WrappedComponent pendingAPICall={pendingAPICall} {... this.props} />
         }
     }
 

@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import logo from '../assets/hoaxify.png';
 import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
+// burada direk olarak AuthenticationContext.js'deki Authentication objesinin kendisini import ediyoruz,
+// komple class i degil
+import { Authentication } from '../shared/AuthenticationContext';
 
 class TopBar extends Component {
-
     // Lifting State Up yaparak bu property leri App.js e tasidik
     // state = {
     //     username: 'user1',
     //     isLoggedIn: false
     //   };
 
+    // 'render props' yontemini daha basit gostermenin bir yolu alttaki gibi
+    // bu component'in (topBar) context tipinin Authentication oldugunu soylersek  
+    // Authentication.Consumerile sarmamiza gerek kalmaz
+    static contextType = Authentication;
+
     render() {
-        const { t, isLoggedIn, username, onLogOutSuccess } = this.props;
+        const { t } = this.props;
+        // Authentication.Consumer : Authentication.Provider'daki datalara erisebilen componentler donucez
+        
+        const { state, onLogOutSuccess } = this.context;
+        const { isLoggedIn, username } = state;
         let links = (
             <ul className="navbar-nav ml-auto">
                 <li>
@@ -57,5 +68,4 @@ class TopBar extends Component {
         );
     }
 }
-
 export default withTranslation()(TopBar);

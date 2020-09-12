@@ -5,7 +5,7 @@ const ProfileCard = (props) => {
     const pathUsername = props.match.params.username;
     const loggedInUsername = props.username;
     let message = 'we cannot edit';
-    if (pathUsername == loggedInUsername) {
+    if (pathUsername === loggedInUsername) {
         message = 'we can edit';
     }
     return (
