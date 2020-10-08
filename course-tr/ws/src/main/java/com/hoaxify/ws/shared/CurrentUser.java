@@ -12,6 +12,4 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 @AuthenticationPrincipal // AuthController'da Authentication objesinden alip User a cast etme islemini kendisi yapacak.
 public @interface CurrentUser {
 	
-	
-
 }

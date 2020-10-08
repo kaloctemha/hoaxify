@@ -1,9 +1,11 @@
 import React from 'react';
-import { signUp  } from '../api/apiCalls';
+import { signUp } from '../api/apiCalls';
 import Input from '../components/Input';
 import { withTranslation } from 'react-i18next';
 import ButtonWithProgress from '../components/ButtonWithProgress';
 import { withApiProgress } from '../shared/ApiProgress';
+import { connect } from 'react-redux';
+import { signUpHandler } from '../redux/authActions'
 
 
 // Iki tip CONPONENT var :
@@ -14,7 +16,7 @@ import { withApiProgress } from '../shared/ApiProgress';
 class UserSignUpPage extends React.Component {
 
     state = {
-        username: null,
+        userName: null,
         //agreedClicked: false
         displayName: null,
         password: null,
@@ -55,13 +57,15 @@ class UserSignUpPage extends React.Component {
     // Axios diye bir paket yukledik (>> npm instal axios), post requestlerini bu tool u kullanarak gondericez
     onClickSignUp = async event => {
         event.preventDefault();
+        const { history, dispatch } = this.props;
+        const { push } = history;
 
         //object destructuring
-        const { username: username, displayName, password } = this.state;
+        const { userName: userName, displayName, password } = this.state;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
         const body = {
-            username: username,
+            userName: userName,
             displayName,
             password
         };
@@ -86,7 +90,8 @@ class UserSignUpPage extends React.Component {
         // async yaparak 'then' case'ini await fonksiyonuyla, catch i ise try-catch in catch i ile
         // yakalayabiliriz
         try {
-            const response = await signUp(body);
+            await dispatch(signUpHandler(body));
+            push('/');
         } catch (error) {
             if (error.response.data.validationErrors) {
                 this.setState({ errors: error.response.data.validationErrors });
@@ -117,7 +122,7 @@ class UserSignUpPage extends React.Component {
     };
 
     // onChangeUserName = (event) => {
-    //     this.setState({username : event.target.value});
+    //     this.setState({userName : event.target.value});
     // };
 
     // onChangeDisplayName = (event) => {
@@ -152,9 +157,9 @@ class UserSignUpPage extends React.Component {
     render() {
 
         // object destructuring
-        const {errors } = this.state;
-        const { username, displayName, password, passwordRepeat } = errors;
-        const { t , pendingAPICall} = this.props;
+        const { errors } = this.state;
+        const { userName, displayName, password, passwordRepeat } = errors;
+        const { t, pendingAPICall } = this.props;
         // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
         // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
         // JSX, React elementleri üretir.
@@ -164,7 +169,7 @@ class UserSignUpPage extends React.Component {
                 <form>
                     <h1 className='text-center'>{t('Sign Up')}</h1>
                     {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
-                    <Input name="username" label={t('Username')} error={username} onChange={this.onChange} />
+                    <Input name="userName" label={t('Username')} error={userName} onChange={this.onChange} />
                     <Input name="displayName" label={t('Display Name')} error={displayName} onChange={this.onChange} />
                     <Input name="password" label={t('Password')} error={password} onChange={this.onChange} type="password" />
                     <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeat} onChange={this.onChange} type="password" />
@@ -176,12 +181,12 @@ class UserSignUpPage extends React.Component {
                     <div className="text-center">
                         <ButtonWithProgress
                             disabled={pendingAPICall || passwordRepeat !== undefined}
-                            pendingAPICall = {pendingAPICall}
+                            pendingAPICall={pendingAPICall}
                             onClick={this.onClickSignUp}
-                            text =  {t("Sign Up")}
+                            text={t("Sign Up")}
                         />
                     </div>
-                    
+
                     {/* <div>  __________ MOVED TO  LanguageSelector.js _________
                         <img src="https://www.countryflags.io/tr/flat/24.png"
                             alt="Turkish Flag"
@@ -208,12 +213,13 @@ class UserSignUpPage extends React.Component {
 // index.js'de import edilen de bu customized edilmis olan oluyor
 // Bu isleme HIGHER ORDER COMPONENT deniyor, kendi component'imizi baska bir component'in icine ekleyerek,
 // oradan bazi ozellikler kazanmak seklinde dusunulebilir
-const  UserSignupPageWihApiProgress = withApiProgress(UserSignUpPage,'/api/1.0/users');
+const UserSignupPageWihApiProgress4SignUp = withApiProgress(UserSignUpPage, '/api/1.0/users');
+const UserSignupPageWihApiProgress4SAuth = withApiProgress(UserSignupPageWihApiProgress4SignUp, '/api/1.0/auth');
 
 // _HIGHER_ORDER_COMPONENT_ mantigini kullanarak ustte translation, burada da apiProgress ozelligini
 // export edecegimiz node module u zenginlestirdik
-const UserSignUpPageWithTranslation = withTranslation()(UserSignupPageWihApiProgress);
+const UserSignUpPageWithTranslation = withTranslation()(UserSignupPageWihApiProgress4SAuth);
 
 // Her Node Module'un (bu olusturdugumuz file bir Node Module'dur) bir tane class veya fonksiyonu
 // EXPORT etmesi beklenir ki bu Node Module' u index.js'de kullanabilelim
-export default UserSignUpPageWithTranslation;
+export default connect()(UserSignUpPageWithTranslation);

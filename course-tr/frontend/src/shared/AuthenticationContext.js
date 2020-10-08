@@ -7,7 +7,7 @@ export const Authentication = React.createContext();
 class AuthenticationContext extends Component {
 
     state = {
-        username: undefined,
+        userName: undefined,
         isLoggedIn: false,
         dislpayName: undefined,
         image: undefined,
@@ -23,10 +23,10 @@ class AuthenticationContext extends Component {
         )
     };
 
-    onLogOutSuccess = (username) => {
+    onLogOutSuccess = (userName) => {
         this.setState(
             {
-                username: undefined,
+                userName: undefined,
                 isLoggedIn: false
             }
         )

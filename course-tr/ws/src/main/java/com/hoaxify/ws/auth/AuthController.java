@@ -1,5 +1,7 @@
 package com.hoaxify.ws.auth;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,7 @@ public class AuthController {
 	ResponseEntity<?> handleAuthentication(@CurrentUser User user) {
 		// @CurrentUser sayesinde authenticate edilmis user direk olarak bizim user objesine cast ediliyor.
 		// bunu @AuthenticationPrincipal sagliyor
+		System.out.println(user);
 		return ResponseEntity.ok(user);
 	}
 }
