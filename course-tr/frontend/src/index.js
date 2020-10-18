@@ -31,9 +31,7 @@ ReactDOM.render(
   //   <App />
   // </AuthenticationContext>
   <Provider store={store}>
-
-    <App />
-
+      <App />
   </Provider>
 
   // <div>  <React.StrictMode>

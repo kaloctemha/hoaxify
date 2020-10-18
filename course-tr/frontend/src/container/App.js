@@ -47,8 +47,6 @@ class App extends React.Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    const userName = undefined;
-
     return (
       <div>
         {/* HashRouter : her sayfa acildiginda backende request atmasin, frontend icinde sayfa switchleri yapilsin 
@@ -84,14 +82,7 @@ class App extends React.Component {
             <Route path="/signup" component={UserSignUpPage} />
 
             {/* App deki userName asagida Userpage'e property olarak verdik,sonra UserPage'den de profileCarda property olarak vericez */}
-            <Route path="/user/:userName"
-              component={
-                (props) => {
-                  return <UserPage {...props} userName={userName} />
-                }
-              } />
-
-            {/* default */}
+            <Route path="/user/:userName" component={UserPage} />
             <Redirect to="/" />
           </Switch>
         </Router>

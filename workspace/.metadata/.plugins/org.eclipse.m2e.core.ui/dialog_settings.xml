@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\Users\acolak\Desktop\xxx\Hoaxify\hoaxify\course-tr\ws"/>
 			<item value="D:\Users\acolak\Desktop\acolak\SPRING\course-tr\ws"/>
 			<item value="D:\Users\acolak\Desktop\xxx\SPRING\hoaxify\course-tr\ws"/>
 		</list>
@@ -13,5 +14,9 @@
 			<item value="[groupId].[artifactId]-[version]"/>
 			<item value="[name]"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>

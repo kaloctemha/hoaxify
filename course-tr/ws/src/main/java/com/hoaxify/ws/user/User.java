@@ -33,7 +33,7 @@ public class User implements UserDetails{
 	private long id;
 
 	// bean validation
-	@NotNull(message = "{hoaxify.constraint.username.NotNull.message}")
+	@NotNull(message = "{hoaxify.constraint.userName.NotNull.message}")
 	@Size(min = 4, max = 255)
 	// @Column(unique = true) // ayni username tekrarlanamaz, hata durumunda exception atiyor ancak bizim
 	// ApiError icerisine koyabilecegimiz bir cozum yok, o nedenle kendi constraint'imizi yaratacagiz

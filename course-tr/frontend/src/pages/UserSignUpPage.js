@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { signUp } from '../api/apiCalls';
 import Input from '../components/Input';
 import { withTranslation } from 'react-i18next';
@@ -13,55 +13,62 @@ import { signUpHandler } from '../redux/authActions'
 //  2 - Buradaki 'class' tipi - stateful (durum bilgisini 'form' bilgilerini tutup backende gondermek)
 
 
-class UserSignUpPage extends React.Component {
+const UserSignUpPage = (props) => {
 
-    state = {
-        userName: null,
-        //agreedClicked: false
-        displayName: null,
-        password: null,
-        passwordRepeat: null,
-        errors: {}
-    }
+    const {username, setUserName } = useState();
 
-    onChange = event => {
+    // Comment-out for HOOKs usage
+    // state = {
+    //     userName: null,
+    //     //agreedClicked: false
+    //     displayName: null,
+    //     password: null,
+    //     passwordRepeat: null,
+    //     errors: {}
+    // }
+
+
+    const onChange = event => {
 
         // const value = event.target.value;
         // const name = event.target.name;
 
         // object destructuring
         const { name, value } = event.target;
-        const { t } = this.props;
+        const { t } = props;
 
-        // JS 'spread operator' to copy object
-        // Bos bir field ile signup yaptiktan sonra, tekrar birseyler yazilmaya baslandiginda
-        // hata mesajini silinmesi islemi icin
-        const errors = { ...this.state.errors }
 
-        errors[name] = undefined;
 
-        if (name === 'password' || name === 'passwordRepeat') {
-            if (name === 'password' && value !== this.state.passwordRepeat) {
-                errors.passwordRepeat = t('Password Mismatch');
-            } else if (name === 'passwordRepeat' && value !== this.state.password) {
-                errors.passwordRepeat = t('Password Mismatch');
-            } else {
-                errors.passwordRepeat = undefined;
-            }
-        }
 
-        // errors objesi icerisindeki hata mesaji da guncellenmis oluyor
-        this.setState({ [name]: value, errors });
+        // // JS 'spread operator' to copy object
+        // const errors = { ...this.state.errors }
+
+        // // Bos bir field ile signup yaptiktan sonra, tekrar birseyler yazilmaya baslandiginda
+        // // hata mesajini silinmesi islemi icin
+        // errors[name] = undefined;
+
+        // if (name === 'password' || name === 'passwordRepeat') {
+        //     if (name === 'password' && value !== this.state.passwordRepeat) {
+        //         errors.passwordRepeat = t('Password Mismatch');
+        //     } else if (name === 'passwordRepeat' && value !== this.state.password) {
+        //         errors.passwordRepeat = t('Password Mismatch');
+        //     } else {
+        //         errors.passwordRepeat = undefined;
+        //     }
+        // }
+
+        // // errors objesi icerisindeki hata mesaji da guncellenmis oluyor
+        // this.setState({ [name]: value, errors });
     };
 
     // Axios diye bir paket yukledik (>> npm instal axios), post requestlerini bu tool u kullanarak gondericez
-    onClickSignUp = async event => {
+    const onClickSignUp = async event => {
         event.preventDefault();
-        const { history, dispatch } = this.props;
+        const { history, dispatch } = props;
         const { push } = history;
 
         //object destructuring
-        const { userName: userName, displayName, password } = this.state;
+        //const { userName: userName, displayName, password } = this.state;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
         const body = {
@@ -94,7 +101,7 @@ class UserSignUpPage extends React.Component {
             push('/');
         } catch (error) {
             if (error.response.data.validationErrors) {
-                this.setState({ errors: error.response.data.validationErrors });
+                //this.setState({ errors: error.response.data.validationErrors });
             }
             // gelen hata mesajini yakalayip ekrana koymak istiyoruz
         }
@@ -154,40 +161,41 @@ class UserSignUpPage extends React.Component {
     //     changeLanguage(language);
     // };
 
-    render() {
 
-        // object destructuring
-        const { errors } = this.state;
-        const { userName, displayName, password, passwordRepeat } = errors;
-        const { t, pendingAPICall } = this.props;
-        // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
-        // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
-        // JSX, React elementleri üretir.
 
-        return (
-            <div className='container'>
-                <form>
-                    <h1 className='text-center'>{t('Sign Up')}</h1>
-                    {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
-                    <Input name="userName" label={t('Username')} error={userName} onChange={this.onChange} />
-                    <Input name="displayName" label={t('Display Name')} error={displayName} onChange={this.onChange} />
-                    <Input name="password" label={t('Password')} error={password} onChange={this.onChange} type="password" />
-                    <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeat} onChange={this.onChange} type="password" />
+    // object destructuring
+    //const { errors } = this.state;
+    const errors = {};
+    const { userName, displayName, password, passwordRepeat } = errors;
+    const { t, pendingAPICall } = props;
+    // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
+    // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
+    // JSX, React elementleri üretir.
 
-                    {/* <div>
+    return (
+        <div className='container'>
+            <form>
+                <h1 className='text-center'>{t('Sign Up')}</h1>
+                {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
+                <Input label={t('Username')} error={userName} onChange={onChange} />
+                <Input name="displayName" label={t('Display Name')} error={displayName} onChange={onChange} />
+                <Input name="password" label={t('Password')} error={password} onChange={onChange} type="password" />
+                <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeat} onChange={onChange} type="password" />
+
+                {/* <div>
                     <input type='checkbox' onChange={this.onChangeAgree} /> Agreed
                 </div> */}
 
-                    <div className="text-center">
-                        <ButtonWithProgress
-                            disabled={pendingAPICall || passwordRepeat !== undefined}
-                            pendingAPICall={pendingAPICall}
-                            onClick={this.onClickSignUp}
-                            text={t("Sign Up")}
-                        />
-                    </div>
+                <div className="text-center">
+                    <ButtonWithProgress
+                        disabled={pendingAPICall || passwordRepeat !== undefined}
+                        pendingAPICall={pendingAPICall}
+                        onClick={onClickSignUp}
+                        text={t("Sign Up")}
+                    />
+                </div>
 
-                    {/* <div>  __________ MOVED TO  LanguageSelector.js _________
+                {/* <div>  __________ MOVED TO  LanguageSelector.js _________
                         <img src="https://www.countryflags.io/tr/flat/24.png"
                             alt="Turkish Flag"
                             onClick={() => this.onChangeLangugage('tr')}
@@ -201,10 +209,9 @@ class UserSignUpPage extends React.Component {
                         </img>
 
                     </div> */}
-                </form>
-            </div>
-        );
-    }
+            </form>
+        </div>
+    );
 }
 
 

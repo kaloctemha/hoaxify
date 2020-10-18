@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-//import { Authentication } from '../shared/AuthenticationContext';
+// import { Authentication } from '../shared/AuthenticationContext';
 // withRouter ile ProfileCard icerisine Router dan gelen property leri ekliyoruz, bunu userPage'de kullanacagiz, userName path gibi bilgileri
 const ProfileCard = (props) => {
+
     const pathUsername = props.match.params.userName;
     let message = 'we cannot edit';
     if (pathUsername === props.loggedInUsername) {
