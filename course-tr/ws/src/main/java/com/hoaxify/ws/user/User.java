@@ -48,7 +48,7 @@ public class User implements UserDetails{
 
 	@NotNull(message = "{hoaxify.constraint.password.NotNull.message}")
 	@Size(min = 8, max = 255)
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{hoaxify.constraint.password.Pattern.message}")
+	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$", message = "{hoaxify.constraint.password.Pattern.message}")
 	// @JsonIgnore bunu kullanarak login requestine donulen cevapta json objesi icerisine pwd koyma sorununu cozebiliriz,
 	// ama bu sefer signUP requestinden de cikarmis oluruz.
 	private String password;
