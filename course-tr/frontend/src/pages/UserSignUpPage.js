@@ -15,6 +15,7 @@ import { signUpHandler } from '../redux/authActions'
 
 const UserSignUpPage = (props) => {
 
+<<<<<<< HEAD
     const [form, setForm] = useState({
         userName: null,
         displayName: null,
@@ -28,14 +29,17 @@ const UserSignUpPage = (props) => {
 
     // }
 
+=======
+    const [userName, setUserName] = useState();
+    const [displayName, setDisplayName] = useState();
+    const [password, setPassword] = useState();
+    const [passwordRepeat, setPasswordRepeat] = useState();
+    const [errors, setErrors] = useState({});
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
 
     const onChange = event => {
-
-        // const value = event.target.value;
-        // const name = event.target.name;
-
-        // object destructuring
         const { name, value } = event.target;
+<<<<<<< HEAD
         // const { t } = props;
 
         // JS 'spread operator' to copy object
@@ -64,77 +68,60 @@ const UserSignUpPage = (props) => {
         setForm((previousForm) => ({ ...previousForm, [name]: value }));
 
         // // errors objesi icerisindeki hata mesaji da guncellenmis oluyor
+=======
+        const { t } = props;
+
+        const errorsCopy = { ...errors };
+        errorsCopy[name] = undefined;
+
+        if (name === 'password' || name === 'passwordRepeat') {
+            if (name === 'password' && value !== passwordRepeat) {
+                errorsCopy.passwordRepeat = t('Password Mismatch');
+            } else if (name === 'passwordRepeat' && value !== password) {
+                errorsCopy.passwordRepeat = t('Password Mismatch');
+            } else {
+                errorsCopy.passwordRepeat = undefined;
+            }
+        }
+
+        setErrors(errorsCopy);
+
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
         // this.setState({ [name]: value, errors });
     };
 
-    // Axios diye bir paket yukledik (>> npm instal axios), post requestlerini bu tool u kullanarak gondericez
     const onClickSignUp = async event => {
         event.preventDefault();
         const { history, dispatch } = props;
         const { push } = history;
+<<<<<<< HEAD
 
         //object destructuring
         const { userName, displayName, password } = form;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
+=======
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
         const body = {
             userName,
             displayName,
             password
         };
-
-        // SignUp butonuna basildiginda islem bitene kadar birden cok kez basilmasini onlemek
-        // icin pendingAPICall diye bir degisken tanimladik ve kontrol ederek butonu disable edicez
-        // ___________ApiProgress e tasindi___________
-        //this.setState({ pendingAPICall: true });
-
-        // alttaki path gosterimi aslinda kullanissiz bir yontem, her seferinde gelip buraya IP:Port degistirmek buyuk is,
-        // bunu webpack proxy ile kullanisli hale getircez
-        // axios.post('http://localhost:8080/api/1.0/users/', body);
-
-        // alttaki gibi yaptigimizda ise request webpack'e gider ve port olmadigi icin webpack backend'e gitmeden 404 doner
-        // istedigimiz port'a gondermesi icin webpack'de porxy ayari yapmamiz lazim
-        // package.json dosyasi altina proxy satiri ekledik : "proxy" : "http://localhost:8080"
-        // bu sayede artik webpack bizim attigimiz req leri nereye gonderecegini biliyor
-        //  CHROME (Browser)   --->   WEBPACK (React Project Dev. Server)    -->    Spring Boot (Backend)
-
-
-        // 'then' ve 'catch' li yontem yerine, icinde bulundugumuz onClickSignUp() methodunu
-        // async yaparak 'then' case'ini await fonksiyonuyla, catch i ise try-catch in catch i ile
-        // yakalayabiliriz
         try {
             await dispatch(signUpHandler(body));
             push('/');
         } catch (error) {
             if (error.response.data.validationErrors) {
+<<<<<<< HEAD
                 //this.setState({ errors: error.response.data.validationErrors });
                 setErrors(error.response.data.validationErrors);
+=======
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
             }
-            // gelen hata mesajini yakalayip ekrana koymak istiyoruz
         }
-
-        // signUp(body)
-        //     .then((response) => {  }) // success case
-        //     .catch((error) => {
-        //         if (error.response.data.validationErrors) {
-        //             this.setState({ errors: error.response.data.validationErrors });
-        //         }
-        //       }); // fail case
-
-        // ___________ApiProgress e tasindi___________
-        // this.setState({ pendingAPICall: false })
-
-        // " ../api/apiCalls/signUp "
-        // signUp(body)
-        //     .then((response) => { this.setState({ pendingAPICall: false }) }) // success case
-        //     .catch((error) => { this.setState({ pendingAPICall: false }) }); // fail case
-
-        // bu 'then' ve 'catch' li yonteme PROMISE deniyo
-        // Iki durumda da FALSE olacaksa neden direk setlemedik de then/catch leri yazdik?
-        // post methodu asenkron calisiyor, cevabi beklemeden alt satira gecer,
-        // callback fonksiyonlarini yazdik ki cevap gelmeden devam etmesin 
     };
 
+<<<<<<< HEAD
     // onChangeUserName = (event) => {
     //     this.setState({userName : event.target.value});
     // };
@@ -182,11 +169,16 @@ const UserSignUpPage = (props) => {
     // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
     // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
     // JSX, React elementleri üretir.
+=======
+    const { userName: userNameError, displayName: displayNameError, password: passwordError, passwordRepeat: passwordRepeatError } = errors;
+    const { t, pendingAPICall } = props;
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
 
     return (
         <div className='container'>
             <form>
                 <h1 className='text-center'>{t('Sign Up')}</h1>
+<<<<<<< HEAD
                 {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
                 <Input name="userName"label={t('Username')} error={userNameError} onChange={onChange} />
                 <Input name="displayName" label={t('Display Name')} error={displayNameError} onChange={onChange} />
@@ -196,6 +188,12 @@ const UserSignUpPage = (props) => {
                 {/* <div>
                     <input type='checkbox' onChange={this.onChangeAgree} /> Agreed
                 </div> */}
+=======
+                <Input name = "userName" label={t('Username')} error={userNameError} onChange={onChange} />
+                <Input name="displayName" label={t('Display Name')} error={displayNameError} onChange={onChange} />
+                <Input name="password" label={t('Password')} error={passwordError} onChange={onChange} type="password" />
+                <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeatError} onChange={onChange} type="password" />
+>>>>>>> 10adcc2b604958cd1b439387f8eb1a58e121ce43
 
                 <div className="text-center">
                     <ButtonWithProgress
@@ -205,39 +203,13 @@ const UserSignUpPage = (props) => {
                         text={t("Sign Up")}
                     />
                 </div>
-
-                {/* <div>  __________ MOVED TO  LanguageSelector.js _________
-                        <img src="https://www.countryflags.io/tr/flat/24.png"
-                            alt="Turkish Flag"
-                            onClick={() => this.onChangeLangugage('tr')}
-                            style={{ cursor: 'pointer' }}>
-                        </img>
-
-                        <img src="https://www.countryflags.io/us/flat/24.png"
-                            alt="USA flag"
-                            onClick={() => this.onChangeLangugage('en')}
-                            style={{ cursor: 'pointer' }}>
-                        </img>
-
-                    </div> */}
             </form>
         </div>
     );
 }
 
 
-
-// Translation edipmis bir UserSignUpPage'i import ediyoruz, dil destegi icin
-// index.js'de import edilen de bu customized edilmis olan oluyor
-// Bu isleme HIGHER ORDER COMPONENT deniyor, kendi component'imizi baska bir component'in icine ekleyerek,
-// oradan bazi ozellikler kazanmak seklinde dusunulebilir
 const UserSignupPageWihApiProgress4SignUp = withApiProgress(UserSignUpPage, '/api/1.0/users');
 const UserSignupPageWihApiProgress4SAuth = withApiProgress(UserSignupPageWihApiProgress4SignUp, '/api/1.0/auth');
-
-// _HIGHER_ORDER_COMPONENT_ mantigini kullanarak ustte translation, burada da apiProgress ozelligini
-// export edecegimiz node module u zenginlestirdik
 const UserSignUpPageWithTranslation = withTranslation()(UserSignupPageWihApiProgress4SAuth);
-
-// Her Node Module'un (bu olusturdugumuz file bir Node Module'dur) bir tane class veya fonksiyonu
-// EXPORT etmesi beklenir ki bu Node Module' u index.js'de kullanabilelim
 export default connect()(UserSignUpPageWithTranslation);
