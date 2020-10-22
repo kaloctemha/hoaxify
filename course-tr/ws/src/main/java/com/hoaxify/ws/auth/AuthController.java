@@ -4,6 +4,7 @@ import java.io.Console;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -17,7 +18,7 @@ public class AuthController {
 
 	@Autowired
 	UserRepositoryIF userRepository;
-
+	
 	@PostMapping("/api/1.0/auth")
 	@JsonView(Views.Base.class)
 	ResponseEntity<?> handleAuthentication(@CurrentUser User user) {

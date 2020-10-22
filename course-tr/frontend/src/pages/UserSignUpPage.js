@@ -15,16 +15,17 @@ import { signUpHandler } from '../redux/authActions'
 
 const UserSignUpPage = (props) => {
 
-    const {username, setUserName } = useState();
+    const [form, setForm] = useState({
+        userName: null,
+        displayName: null,
+        password: null,
+        passwordRepeat: null,
+    });
+    const [errors , setErrors] = useState({});
 
     // Comment-out for HOOKs usage
     // state = {
-    //     userName: null,
-    //     //agreedClicked: false
-    //     displayName: null,
-    //     password: null,
-    //     passwordRepeat: null,
-    //     errors: {}
+
     // }
 
 
@@ -35,27 +36,32 @@ const UserSignUpPage = (props) => {
 
         // object destructuring
         const { name, value } = event.target;
-        const { t } = props;
+        // const { t } = props;
 
+        // JS 'spread operator' to copy object
+        //const errorsCopy = { ...errors }
 
-
-
-        // // JS 'spread operator' to copy object
-        // const errors = { ...this.state.errors }
-
-        // // Bos bir field ile signup yaptiktan sonra, tekrar birseyler yazilmaya baslandiginda
-        // // hata mesajini silinmesi islemi icin
-        // errors[name] = undefined;
+        // Bos bir field ile signup yaptiktan sonra, tekrar birseyler yazilmaya baslandiginda
+        // hata mesajini silinmesi islemi icin
+        //errorsCopy[name] = undefined;
 
         // if (name === 'password' || name === 'passwordRepeat') {
-        //     if (name === 'password' && value !== this.state.passwordRepeat) {
-        //         errors.passwordRepeat = t('Password Mismatch');
-        //     } else if (name === 'passwordRepeat' && value !== this.state.password) {
-        //         errors.passwordRepeat = t('Password Mismatch');
+        //     if (name === 'password' && value !== form.passwordRepeat) {
+        //         errorsCopy.passwordRepeat = t('Password Mismatch');
+        //     } else if (name === 'passwordRepeat' && value !== form.password) {
+        //         errorsCopy.passwordRepeat = t('Password Mismatch');
         //     } else {
-        //         errors.passwordRepeat = undefined;
+        //         errorsCopy.passwordRepeat = undefined;
         //     }
         // }
+
+        //setErrors(errorsCopy);
+        setErrors((previousErrors) => ({ ...previousErrors, [name]: undefined }));
+        // const formCopy = {...form};
+        // formCopy[name] = value;
+        // setForm(formCopy);
+        // usttekini basitlestirdik
+        setForm((previousForm) => ({ ...previousForm, [name]: value }));
 
         // // errors objesi icerisindeki hata mesaji da guncellenmis oluyor
         // this.setState({ [name]: value, errors });
@@ -68,11 +74,11 @@ const UserSignUpPage = (props) => {
         const { push } = history;
 
         //object destructuring
-        //const { userName: userName, displayName, password } = this.state;
+        const { userName, displayName, password } = form;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
         const body = {
-            userName: userName,
+            userName,
             displayName,
             password
         };
@@ -102,6 +108,7 @@ const UserSignUpPage = (props) => {
         } catch (error) {
             if (error.response.data.validationErrors) {
                 //this.setState({ errors: error.response.data.validationErrors });
+                setErrors(error.response.data.validationErrors);
             }
             // gelen hata mesajini yakalayip ekrana koymak istiyoruz
         }
@@ -165,9 +172,13 @@ const UserSignUpPage = (props) => {
 
     // object destructuring
     //const { errors } = this.state;
-    const errors = {};
-    const { userName, displayName, password, passwordRepeat } = errors;
+    const { userName : userNameError, displayName : displayNameError, password : passwordError} = errors;
     const { t, pendingAPICall } = props;
+
+    let passwordRepeatError;
+    if(form.password != form.passwordRepeat){
+        passwordRepeatError = t('Password Mismatch');
+    }
     // ACOLAK_LOG :  bu alttaki kisim 'html' e benziyor gibi gorunebilir 
     // ancak JSX'dir, JavaScript için bir syntax uzantısıdır., 
     // JSX, React elementleri üretir.
@@ -177,10 +188,10 @@ const UserSignUpPage = (props) => {
             <form>
                 <h1 className='text-center'>{t('Sign Up')}</h1>
                 {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
-                <Input label={t('Username')} error={userName} onChange={onChange} />
-                <Input name="displayName" label={t('Display Name')} error={displayName} onChange={onChange} />
-                <Input name="password" label={t('Password')} error={password} onChange={onChange} type="password" />
-                <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeat} onChange={onChange} type="password" />
+                <Input name="userName"label={t('Username')} error={userNameError} onChange={onChange} />
+                <Input name="displayName" label={t('Display Name')} error={displayNameError} onChange={onChange} />
+                <Input name="password" label={t('Password')} error={passwordError} onChange={onChange} type="password" />
+                <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeatError} onChange={onChange} type="password" />
 
                 {/* <div>
                     <input type='checkbox' onChange={this.onChangeAgree} /> Agreed
@@ -188,7 +199,7 @@ const UserSignUpPage = (props) => {
 
                 <div className="text-center">
                     <ButtonWithProgress
-                        disabled={pendingAPICall || passwordRepeat !== undefined}
+                        disabled={pendingAPICall || passwordRepeatError !== undefined}
                         pendingAPICall={pendingAPICall}
                         onClick={onClickSignUp}
                         text={t("Sign Up")}
