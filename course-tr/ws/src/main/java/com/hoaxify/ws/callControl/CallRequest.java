@@ -1,7 +1,5 @@
 package com.hoaxify.ws.callControl;
 
-import com.hoaxify.ws.user.User;
-
 import lombok.Data;
 
 @Data

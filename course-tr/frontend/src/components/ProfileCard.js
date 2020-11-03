@@ -1,13 +1,15 @@
-import React, {useContext} from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import { Authentication } from '../shared/AuthenticationContext';
 // withRouter ile ProfileCard icerisine Router dan gelen property leri ekliyoruz, bunu userPage'de kullanacagiz, userName path gibi bilgileri
 const ProfileCard = (props) => {
 
-    const pathUsername = props.match.params.userName;
+    const { userName: loggedInUsername } = useSelector((store) => ({ userName: store.userName }));
+    const routeParams = useParams();
+    const pathUsername = routeParams.userName;
     let message = 'we cannot edit';
-    if (pathUsername === props.loggedInUsername) {
+    if (pathUsername === loggedInUsername) {
         message = 'we can edit';
     }
     return (
@@ -27,10 +29,10 @@ const ProfileCard = (props) => {
 //     }
 // }
 
-const mapStateToProps = (store) => {
-    return {
-        loggedInUsername: store.userName,
-    };
-};
+// const mapStateToProps = (store) => {
+//     return {
+//         loggedInUsername: store.userName,
+//     };
+// };
 
-export default connect(mapStateToProps)(withRouter(ProfileCard));
+export default ProfileCard;

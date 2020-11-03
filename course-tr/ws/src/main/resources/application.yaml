@@ -1,2 +1,5 @@
 spring.jpa.hibernate.ddl-auto: update
 spring.jpa.properties.javax.persistence.validation.mode: none
+spring.data.web.pageable.defaultPageSize : 10
+spring.data.web.pageable.maxPageSize : 100
+logging.level.org.springframework : DEBUG

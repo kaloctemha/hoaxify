@@ -13,7 +13,10 @@ i18n.use(initReactI18next).init({
                 'Password Repeat': 'Password Repeat',
                 'Login': 'Login',
                 'Home Page': 'Home Page',
-                'Logout' : 'Logout'
+                'Logout' : 'Logout',
+                'Users' : 'Users',
+                'Next' : 'Next >>',
+                'Previous' : '<< Previous'
                 
             }
         },
@@ -27,7 +30,10 @@ i18n.use(initReactI18next).init({
                 'Password Repeat': 'Sifre Tekrar',
                 'Login': 'Giris',
                 'Home Page': 'Anasayfa',
-                'Logout' : 'Cikis'
+                'Logout' : 'Cikis',
+                'Users' : 'Kullanicilar',
+                'Next' : 'Sonraki >>',
+                'Previous' : '<< Onceki'
             }
         }
     },

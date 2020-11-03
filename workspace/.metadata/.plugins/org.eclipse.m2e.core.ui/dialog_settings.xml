@@ -2,9 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
-			<item value="D:\Users\acolak\Desktop\xxx\Hoaxify\hoaxify\course-tr\ws"/>
 			<item value="D:\Users\acolak\Desktop\acolak\SPRING\course-tr\ws"/>
-			<item value="D:\Users\acolak\Desktop\xxx\SPRING\hoaxify\course-tr\ws"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

@@ -1,6 +1,6 @@
 import * as ACTIONS from './Constants'
 import { login, signUp } from "../api/apiCalls";
-export const onLogOutSuccess = () => {
+export const logOutSuccess = () => {
     return {
         type: ACTIONS.LOGOUT_SUCCESS
     }
@@ -21,7 +21,7 @@ export const loginHandler = (creds) => {
     return async function (dispatch) {
         const response = await login(creds);
         const authState = {
-            ...response.data,
+            ...response.data.userName,
             password: creds.password
         }
         dispatch(loginSuccess(authState));

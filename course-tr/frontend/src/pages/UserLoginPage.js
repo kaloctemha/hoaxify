@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Input from '../components/Input';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import ButtonWithProgress from '../components/ButtonWithProgress';
-import { withApiProgress } from '../shared/ApiProgress';
-import { connect } from 'react-redux';
+import { useApiProgress} from '../shared/ApiProgress';
+import { useDispatch } from 'react-redux';
 import { loginHandler } from '../redux/authActions';
 
 // import { Authentication } from '../shared/AuthenticationContext';
@@ -29,6 +29,10 @@ const UserLoginPage = (props) => {
     // temizliyorduk, Hooks ile bunu nasil yapariz? "useEffect" kullanarak. verilen dizideki fieldlarda bir update gerceklesirse,
     // arrow function ile gonderdigimiz method'u calistir diyoruz
     useEffect(() => { setError(undefined)}, [userName, password]);
+
+    // redux disoatch yerine Hook dispatch i kullandik
+    const dispatch =  useDispatch();
+
 
 
 
@@ -67,7 +71,7 @@ const UserLoginPage = (props) => {
         event.preventDefault();
         //const { userName, password } = this.state;
         const creds = { userName, password };
-        const { history, dispatch } = props;
+        const { history} = props;
         const { push } = history;
         setError(undefined);
         //this.setState({ error: null }); // kullanici click yaptiktan sonra cevap gelene kadar hata mesajini(unauthrised) ortadan kaldiralim
@@ -89,7 +93,10 @@ const UserLoginPage = (props) => {
     // render () {}  --> Hooks icin func tipinde componente cevirdigimizden artik render diye bir seye ihtiyac kalmadi
 
     // ApiProgress'de clone yapildi, o nedenle bu class'a pendingAPICall property olarak geliyor, props'dan alabiliriz
-    const { t, pendingAPICall } = props;
+    // const {pendingAPICall } = props;
+
+    const pendingAPICall = useApiProgress('/api/1.0/auth/');
+    const { t } = useTranslation();
     const buttonEnabled = userName && password;
 
     return (
@@ -114,8 +121,9 @@ const UserLoginPage = (props) => {
 
 }
 
-
-const UserLoginPageWithTranslation = withTranslation()(UserLoginPage);
+// useTranslation Hook unu kullanarak t fonsiyonunu cektik ve alttaki gibi
+// withTranslation ile sarmamiza gerek kalmadi
+// const UserLoginPageWithTranslation = withTranslation()(UserLoginPage);
 
 // const mapDispatchToProps = (dispatch) => {
 //     return {
@@ -123,7 +131,11 @@ const UserLoginPageWithTranslation = withTranslation()(UserLoginPage);
 //     };
 // }
 
-export default connect()(withApiProgress(UserLoginPageWithTranslation, '/api/1.0/auth/'));
+
+// useDispatch Hook u ile connect'i replace ettik
+//export default connect()(withApiProgress(UserLoginPage, '/api/1.0/auth/'));
+
+export default UserLoginPage;
 
 // Her Node Module'un (bu olusturdugumuz file bir Node Module'dur) bir tane class veya fonksiyonu
 // EXPORT etmesi beklenir ki bu Node Module' u index.js'de kullanabilelim

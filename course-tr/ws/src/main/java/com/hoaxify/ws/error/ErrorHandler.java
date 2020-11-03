@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
 
-// Spring in basic errorcontroller ini ezmek icin kendi error controller imizi yazdik ki ApiError'u kullanabilelim
 @RestController
 public class ErrorHandler implements ErrorController {
 	
 	@Autowired
 	private ErrorAttributes errorAttributes;
 	
-	@RequestMapping("/error")
+	@RequestMapping("/error") // // Spring in basic errorcontroller ini ezmek icin kendi error controller imizi yazdik ki ApiError'u kullanabilelim
 	ApiError handleError(WebRequest webRequest) {
 		Map<String, Object> attributeMap = this.errorAttributes.getErrorAttributes(webRequest, true);
 		String message = (String) attributeMap.get("message");

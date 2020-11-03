@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-@EnableWebSecurity(debug =true)
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -25,6 +25,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Client post attiginda req icinde bir de gizli token olur, aslinda bu bir guvenlik kontroludur.
 		// O request'in kullanicinin kendi aksiyonlariyla gonderildigini garanti etmek gibi bir seydir
 		http.csrf().disable();
+		
+		
+		http.headers().httpStrictTransportSecurity().disable();
+		
+		// port sorunu icin yazdim tam ne yaptigina hakim degilim
+		//http.headers().frameOptions().disable();
 		
 		// "www-authentica basic" header ini ucurmak icin AuthenticationEntryPoint kullandik,
 		// Spring bunu yollarsa browser bi sign-in pop up cikariyor
@@ -42,9 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// hemen ardindan frontend'den bu sefer "no-auth" ile req attigimizda da fail olmasi gerekirken success oluyor.
 		// Bunu engellemek icin sessionCreationPolicy i configledik, her request artik cridential icermek zorunda
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 	}
-	
-	
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

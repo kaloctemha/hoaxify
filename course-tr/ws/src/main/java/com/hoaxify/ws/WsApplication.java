@@ -13,8 +13,8 @@ import com.hoaxify.ws.user.UserService;
 // @SpringBootApplication ile Spring otomatik olarak butun requestleri secure hale getiriyor,
 // bu da bizim 401 gibi bad response'lar almamiza sebep oluyor
 // SecurityAutoConfiguration'u exclude ederek bu sorundan kurtuluyoruz
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 //@SpringBootApplication
+@SpringBootApplication//(exclude = SecurityAutoConfiguration.class)
 public class WsApplication {
 
 	public static void main(String[] args) {
@@ -24,11 +24,13 @@ public class WsApplication {
 	@Bean
 	CommandLineRunner createInitialUsers(UserService userService) {
 		return (args) -> {
-			User user = new User();
-			user.setUserName("user1");
-			user.setDisplayName("display1");
-			user.setPassword("afacan");
-			userService.save(user);
+			for (int i = 1; i <= 25; i++) {
+				User user = new User();
+				user.setUsername("user" + i);
+				user.setDisplayName("display" + i);
+				user.setPassword("afacan");
+				userService.save(user);
+			}
 		};
 	}
 }

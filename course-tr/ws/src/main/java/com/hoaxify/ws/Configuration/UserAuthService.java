@@ -1,7 +1,6 @@
 package com.hoaxify.ws.Configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,10 +13,10 @@ public class UserAuthService implements UserDetailsService {
 	
 	@Autowired
 	UserRepositoryIF userRepository;
-	
+		
 	@Override
 	public User loadUserByUsername(String username) throws UsernameNotFoundException {
-		User userInDB = userRepository.findByuserName(username);
+		User userInDB = userRepository.findByusername(username);
 		if(userInDB == null) {
 			throw new UsernameNotFoundException("User not found");
 		}

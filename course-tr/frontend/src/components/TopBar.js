@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from '../assets/hoaxify.png';
 import { Link } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { onLogOutSuccess } from '../redux/authActions';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { logOutSuccess } from '../redux/authActions';
 // burada direk olarak AuthenticationContext.js'deki Authentication objesinin kendisini import ediyoruz,
 // komple class i degil
 
@@ -36,10 +36,22 @@ const TopBar = (props) => {
     //     this.props.dispatch(onLogOutSuccess());
     // }
 
+    const { t } = useTranslation();
 
+    const reduxState = useSelector((store) => ({
+        isLoggedIn: store.isLoggedIn,
+        userName: store.userName
+    }));
+    const { userName, isLoggedIn } = reduxState;
 
-    // Topbar'a Redux state property olarak geldi mi kontrol etmek icin logla
-    const { t, isLoggedIn, userName, onLogOutSuccess } = props;
+    const dispatch = useDispatch();
+
+    const onLogOutSuccess = () => {
+        dispatch(logOutSuccess());
+    };
+
+    // useDispatch e donduk bu uctu
+    // const {onLogOutSuccess } = props;
 
 
     // Authentication.Consumer : Authentication.Provider'daki datalara erisebilen componentler donucez
@@ -87,21 +99,20 @@ const TopBar = (props) => {
     );
 }
 
-const TopBarWithTranslation = withTranslation()(TopBar);
 // redux'daki state(store diye tanimlanan) bilgisini, TopBar'a property olarak
 // alacagimiz bir function yaziyoruz. Bu fonksiyonu(mapStateToProps) Redux, "connect"
 //  araciligiyla cagiracak 
-const mapStateToProps = (store) => {
-    return {
-        isLoggedIn: store.isLoggedIn,
-        userName: store.userName
-    };
-}
+// const mapStateToProps = (store) => {
+//     return {
+//         isLoggedIn: store.isLoggedIn,
+//         userName: store.userName
+//     };
+// }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogOutSuccess: () => dispatch(onLogOutSuccess())
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onLogOutSuccess: () => dispatch(onLogOutSuccess())
+//     }
+// }
 // redux in connect objesi
-export default connect(mapStateToProps, mapDispatchToProps)(TopBarWithTranslation);
+export default TopBar;

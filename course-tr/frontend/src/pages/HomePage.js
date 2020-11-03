@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import UserList from '../components/UserList'
 
 
+const HomePage = () => {
+    return <div className='container'><UserList></UserList></div>;
+};
 
-class HomePage extends Component {
-    render() {
-
-        const {t} = this.props;
-        return (
-            <div className = 'contanier'>
-                {t('Home Page')}
-            </div>
-        );
-    }
-}
-
-export default withTranslation()(HomePage);
+export default HomePage;

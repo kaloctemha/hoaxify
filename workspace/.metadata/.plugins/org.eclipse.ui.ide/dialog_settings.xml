@@ -82,12 +82,13 @@
 		<item value="org.jboss.tools.m2e.wro4j.feature:1.1.0.201406251020"/>
 		<item value="org.sonatype.m2e.buildhelper.feature:0.15.0.201207090124"/>
 		<item value="org.sonatype.m2e.egit.feature:0.15.1.201806191431"/>
-		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.4.201905300046"/>
+		<item value="org.sonatype.m2e.mavenarchiver.feature:0.17.5.202002191804"/>
 		<item value="org.springframework.ide.eclipse.ajdt.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.aop.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.autowire.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.batch.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.boot.dash.feature:3.9.9.201906180643-RELEASE"/>
+		<item value="org.springframework.ide.eclipse.boot.feature.source:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.boot.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.cft.feature:3.9.9.201906180643-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.data.feature:3.9.9.201906180643-RELEASE"/>
@@ -104,7 +105,7 @@
 	</list>
 	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
 		<item key="ShowStatusLine" value="true"/>
-		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/UserController.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/resources/application.yaml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/error/ApiError.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/User.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/WsApplication.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/bin/src/main/resources/application.yaml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/bin/src/main/java/com/hoaxify/ws/Configuration/SecurityConfiguration.class&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/vm/UserVM.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/UserRepositoryIF.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/bin/src/main/java/com/hoaxify/ws/user/UserController.class&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/User.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/UserService.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/auth/AuthController.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/java/com/hoaxify/ws/user/UserController.java&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;infoNode path=&quot;/hoaxify/src/main/resources/application.yaml&quot; type=&quot;1&quot;/&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;"/>
 		<item key="ShowDerived" value="false"/>
 		<item key="FilterByLocation" value="false"/>
 		<item key="WorkingSet" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;"/>

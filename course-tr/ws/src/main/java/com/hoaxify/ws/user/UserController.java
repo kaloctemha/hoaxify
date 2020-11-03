@@ -1,41 +1,36 @@
 package com.hoaxify.ws.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hoaxify.ws.error.ApiError;
+import com.hoaxify.ws.shared.CurrentUser;
 import com.hoaxify.ws.shared.GenericResponse;
+import com.hoaxify.ws.user.vm.UserVM;;
 
 //kullanici ile alakali butun http req lerin ulastigi class olacak
 // restful bi web servisi yazmaya calisiyoruz
 
 @RestController
 public class UserController {
-	
+
 	// Uyg ayaga kalktiginda Spring 'dependency injection' i gorup gidip bizim
 	// userService objemizi setleyecek
 	@Autowired
 	UserService userService;
-	
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-	//@CrossOrigin  // client ile server in portlarinin uyusmazligini gideren bir sey
-	//@ResponseStatus(HttpStatus.OK) // Gelen Post Requestine donecegimiz cevap tipini belirleyebiliyoruz
+//	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
+	// @CrossOrigin // client ile server in portlarinin uyusmazligini gideren bir
+	// sey
+	// @ResponseStatus(HttpStatus.OK) // Gelen Post Requestine donecegimiz cevap
+	// tipini belirleyebiliyoruz
 	@PostMapping("/api/1.0/users/") // Spring'e bu method bu path'e gelen post requestlerini isleyecek diyoruz.
 	public GenericResponse createUser(@Valid @RequestBody User user) {// @Valid : Bean validation, user objesi bu
 																		// methoda gelmeden spring valid mi bakacak
@@ -68,6 +63,35 @@ public class UserController {
 		// Jackson nasil gelen User objesini donusturduyse,
 		// return ettigimiz GenericReponse objesini de JSON a donusturecek
 		return new GenericResponse("User Created");
+	}
+
+	@GetMapping("/api/1.0/users")
+	public Page<UserVM> getUsers(Pageable page, @CurrentUser User user) {
+
+		// ESKI STIL
+		/*
+		 * return userService.getUsers(page).map(new Function<User, UserVM>() {
+		 * 
+		 * @Override public UserVM apply(User t) { return new UserVM(t); } });
+		 */
+
+		// Lambda function
+		/*
+		 * return userService.getUsers(page).map((user) -> { return new UserVM(user);
+		 * });
+		 */
+
+		// map: array tipindeki data setinde dongu yapip, oradaki objeyi baska bir
+		// objeye donusturme islemi
+		// burada User tipinde obje alip UserVM tipinde obje donecek
+
+		// METHOD REFERENCE <-- Java8
+		// Biliyoruz ki map bize bir User objesi verecek, biz de map i UserVM in
+		// constructor ina referans olarak paslicaz
+		// UserVM in constructor ine map den aldigin User objesini referans olarak
+		// gonder ve yeni obje olustur
+		return userService.getUsers(page, user).map(UserVM::new);
+
 	}
 	// ================== burayi ErrorHandler icerisine tasidik ==================
 //	@ExceptionHandler(MethodArgumentNotValidException.class) // Validation olusursa bu method calissin demek
