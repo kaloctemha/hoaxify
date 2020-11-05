@@ -40,9 +40,9 @@ const TopBar = (props) => {
 
     const reduxState = useSelector((store) => ({
         isLoggedIn: store.isLoggedIn,
-        userName: store.userName
+        username: store.username
     }));
-    const { userName, isLoggedIn } = reduxState;
+    const { username, isLoggedIn } = reduxState;
 
     const dispatch = useDispatch();
 
@@ -75,8 +75,8 @@ const TopBar = (props) => {
         links = (
             <ul className="navbar-nav ml-auto">
                 <li>
-                    <Link className="nav-link" to={`/user/${userName}`}>
-                        {userName}
+                    <Link className="nav-link" to={`/user/${username}`}>
+                        {username}
                     </Link>
                 </li>
 

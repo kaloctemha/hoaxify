@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux';
 // withRouter ile ProfileCard icerisine Router dan gelen property leri ekliyoruz, bunu userPage'de kullanacagiz, userName path gibi bilgileri
 const ProfileCard = (props) => {
 
-    const { userName: loggedInUsername } = useSelector((store) => ({ userName: store.userName }));
+    const { username: loggedInUsername } = useSelector((store) => ({ username: store.username }));
+    console.log("loggedInUsername is ", loggedInUsername);
     const routeParams = useParams();
-    const pathUsername = routeParams.userName;
+    const pathUsername = routeParams.username;
     let message = 'we cannot edit';
     if (pathUsername === loggedInUsername) {
         message = 'we can edit';

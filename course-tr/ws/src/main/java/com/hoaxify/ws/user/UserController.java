@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hoaxify.ws.shared.CurrentUser;
@@ -18,6 +19,7 @@ import com.hoaxify.ws.user.vm.UserVM;;
 // restful bi web servisi yazmaya calisiyoruz
 
 @RestController
+@RequestMapping("/api/1.0")
 public class UserController {
 
 	// Uyg ayaga kalktiginda Spring 'dependency injection' i gorup gidip bizim
@@ -31,7 +33,7 @@ public class UserController {
 	// sey
 	// @ResponseStatus(HttpStatus.OK) // Gelen Post Requestine donecegimiz cevap
 	// tipini belirleyebiliyoruz
-	@PostMapping("/api/1.0/users/") // Spring'e bu method bu path'e gelen post requestlerini isleyecek diyoruz.
+	@PostMapping("/users") // Spring'e bu method bu path'e gelen post requestlerini isleyecek diyoruz.
 	public GenericResponse createUser(@Valid @RequestBody User user) {// @Valid : Bean validation, user objesi bu
 																		// methoda gelmeden spring valid mi bakacak
 																		// (Hibernate Validator)
@@ -65,7 +67,7 @@ public class UserController {
 		return new GenericResponse("User Created");
 	}
 
-	@GetMapping("/api/1.0/users")
+	@GetMapping("/users")
 	public Page<UserVM> getUsers(Pageable page, @CurrentUser User user) {
 
 		// ESKI STIL

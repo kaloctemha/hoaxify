@@ -82,7 +82,7 @@ const App = () => {
           <Route path="/signup" component={UserSignUpPage} />
 
           {/* App deki userName asagida Userpage'e property olarak verdik,sonra UserPage'den de profileCarda property olarak vericez */}
-          <Route path="/user/:userName" component={UserPage} />
+          <Route path="/user/:username" component={UserPage} />
           <Redirect to="/" />
         </Switch>
       </Router>

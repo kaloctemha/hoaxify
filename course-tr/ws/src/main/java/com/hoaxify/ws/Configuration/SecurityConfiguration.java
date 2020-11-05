@@ -1,8 +1,11 @@
 package com.hoaxify.ws.Configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,12 +28,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Client post attiginda req icinde bir de gizli token olur, aslinda bu bir guvenlik kontroludur.
 		// O request'in kullanicinin kendi aksiyonlariyla gonderildigini garanti etmek gibi bir seydir
 		http.csrf().disable();
+		//http.httpBasic();
 		
-		
-		http.headers().httpStrictTransportSecurity().disable();
+		//http.headers().httpStrictTransportSecurity().disable();
 		
 		// port sorunu icin yazdim tam ne yaptigina hakim degilim
-		//http.headers().frameOptions().disable();
+		http.headers().frameOptions().disable();
 		
 		// "www-authentica basic" header ini ucurmak icin AuthenticationEntryPoint kullandik,
 		// Spring bunu yollarsa browser bi sign-in pop up cikariyor
@@ -41,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Simdi amac bu isi Spring'e yaptirmak, bu durumda @PostMapping("/api/1.0/auth")'a gelen
 		// butun req lerin authenticated bir sekilde gelmesi gerektigini Spring'e soylememiz gerekiyor.
 		// Yani spring gelen req'i bize ulasmadan arkada authenticate edecek.
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth").authenticated()
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/1.0/auth/").authenticated()
 								.and().authorizeRequests().anyRequest().permitAll(); // ustteki iki req disinda hersey istedigi gibi gelebilir demek
 		
 		// Biz frontend'den basarili bir login attigimizda bir session uretiliyor, cookie olusturuluyor

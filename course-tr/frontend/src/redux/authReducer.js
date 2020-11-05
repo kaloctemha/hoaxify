@@ -2,7 +2,7 @@
 import * as ACTIONS from './Constants'
 
 const defaultState = {
-  userName: undefined,
+  username: undefined,
   isLoggedIn: false,
   dislpayName: undefined,
   image: undefined,

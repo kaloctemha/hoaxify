@@ -21,21 +21,17 @@ const UserLoginPage = (props) => {
     // };
 
     // useState() - useEffect() - useContext()   <--- Bunlar hep Hook
-    const [userName, setUsername] = useState();
+    const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();
 
     // Normalde login sayfasinda biz hatali bir mesaj aldiktan sonra ekrana bir sey yazdigimizda altta cikan hatayi (yani error'u)
     // temizliyorduk, Hooks ile bunu nasil yapariz? "useEffect" kullanarak. verilen dizideki fieldlarda bir update gerceklesirse,
     // arrow function ile gonderdigimiz method'u calistir diyoruz
-    useEffect(() => { setError(undefined)}, [userName, password]);
+    useEffect(() => { setError(undefined)}, [username, password]);
 
     // redux disoatch yerine Hook dispatch i kullandik
     const dispatch =  useDispatch();
-
-
-
-
 
 
     // React in componentlerinin lifecycle'inda sayfa yuklenirken bu method cagirliyor.
@@ -70,7 +66,7 @@ const UserLoginPage = (props) => {
     const onClickLogin = async event => {
         event.preventDefault();
         //const { userName, password } = this.state;
-        const creds = { userName, password };
+        const creds = { username, password };
         const { history} = props;
         const { push } = history;
         setError(undefined);
@@ -95,9 +91,9 @@ const UserLoginPage = (props) => {
     // ApiProgress'de clone yapildi, o nedenle bu class'a pendingAPICall property olarak geliyor, props'dan alabiliriz
     // const {pendingAPICall } = props;
 
-    const pendingAPICall = useApiProgress('/api/1.0/auth/');
+    const pendingAPICall = useApiProgress('/api/1.0/auth');
     const { t } = useTranslation();
-    const buttonEnabled = userName && password;
+    const buttonEnabled = username && password;
 
     return (
         <div className='container'>

@@ -7,7 +7,7 @@ const secureLS = new SecureLS();
 
 const loggedInState = {
     isLoggedIn: true,
-    userName: 'user1',
+    username: 'user1',
     displayName: 'disp1',
     image: null,
     password: 'afacan'
@@ -18,7 +18,7 @@ const getStateFromStorage = () => {
     // localstorage a kaydedip tekrar okuyoruz
 
     let stateInLocalStorage = {
-        userName: undefined,
+        username: undefined,
         isLoggedIn: false,
         dislpayName: undefined,
         image: undefined,

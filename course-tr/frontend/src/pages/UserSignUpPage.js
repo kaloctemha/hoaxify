@@ -16,7 +16,7 @@ import { signUpHandler } from '../redux/authActions'
 const UserSignUpPage = (props) => {
 
     const [form, setForm] = useState({
-        userName: null,
+        username: null,
         displayName: null,
         password: null,
         passwordRepeat: null,
@@ -70,11 +70,11 @@ const UserSignUpPage = (props) => {
         const { push } = history;
 
         //object destructuring
-        const { userName, displayName, password } = form;
+        const { username, displayName, password } = form;
 
         // JS diyor ki, bir JSON objesi uretirken key ve value icin isimlendirmeler ayni ise sadece birini kullanmaniz yeterli
         const body = {
-            userName,
+            username,
             displayName,
             password
         };
@@ -126,7 +126,7 @@ const UserSignUpPage = (props) => {
 
     // object destructuring
     //const { errors } = this.state;
-    const { userName: userNameError, displayName: displayNameError, password: passwordError } = errors;
+    const { username: userNameError, displayName: displayNameError, password: passwordError } = errors;
     // const { pendingAPICall } = props;
     const pendingAPICallSignUp = useApiProgress('/api/1.0/users');
     const pendingAPICallLogin = useApiProgress('/api/1.0/auth');
@@ -146,7 +146,7 @@ const UserSignUpPage = (props) => {
             <form>
                 <h1 className='text-center'>{t('Sign Up')}</h1>
                 {/* Input bizim yazdigimiz component, input (basta kucuk i ile yazilan) react'in kendi componenti */}
-                <Input name="userName" label={t('Username')} error={userNameError} onChange={onChange} />
+                <Input name="username" label={t('Username')} error={userNameError} onChange={onChange} />
                 <Input name="displayName" label={t('Display Name')} error={displayNameError} onChange={onChange} />
                 <Input name="password" label={t('Password')} error={passwordError} onChange={onChange} type="password" />
                 <Input name="passwordRepeat" label={t('Password Repeat')} error={passwordRepeatError} onChange={onChange} type="password" />
