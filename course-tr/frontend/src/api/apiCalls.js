@@ -16,3 +16,9 @@ export const changeLanguage = language => {
 export const getUsers = (page=0, size=3) => {
     return axios.get(`/api/1.0/users?page=${page}&size=${size}`);
 }
+
+export const setAuthorizationHeader = ({ username, password }) => {
+    const authHeaderValue = `Basic ${btoa(username + ':' + password )}`
+    console.log('authHeaderValue',authHeaderValue);
+    axios.defaults.headers['Authorization'] = authHeaderValue;
+}

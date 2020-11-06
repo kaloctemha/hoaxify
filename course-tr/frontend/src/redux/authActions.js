@@ -1,6 +1,5 @@
 import * as ACTIONS from './Constants'
-import { login, signUp } from "../api/apiCalls";
-
+import { login, signUp, setAuthorizationHeader } from "../api/apiCalls";
 export const logOutSuccess = () => {
     return {
         type: ACTIONS.LOGOUT_SUCCESS
@@ -28,6 +27,7 @@ export const loginHandler = credentials => {
 
       console.log("authState objct is ",authState);
       dispatch(loginSuccess(authState));
+      //setAuthorizationHeader(credentials);
       return response;
     };
   };
