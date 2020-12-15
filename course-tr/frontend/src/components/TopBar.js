@@ -38,11 +38,10 @@ const TopBar = (props) => {
 
     const { t } = useTranslation();
 
-    const reduxState = useSelector((store) => ({
+    const { username, isLoggedIn } = useSelector((store) => ({
         isLoggedIn: store.isLoggedIn,
         username: store.username
     }));
-    const { username, isLoggedIn } = reduxState;
 
     const dispatch = useDispatch();
 

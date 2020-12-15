@@ -27,7 +27,7 @@ export const loginHandler = credentials => {
 
       console.log("authState objct is ",authState);
       dispatch(loginSuccess(authState));
-      //setAuthorizationHeader(credentials);
+      setAuthorizationHeader(credentials);
       return response;
     };
   };

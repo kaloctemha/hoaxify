@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hoaxify.ws.error.NotFoundException;
+
 // Katmanli mimari anlayisiyla controller ve repository arasina bu islerin tamamini yapacak bir katman ekleyerek
 // ikisini birbirinden izole etmek gerekir. Userservice bizim icin bu isi yapacak. DB'ye yazma sile vs isleri buraya
 @Service
@@ -35,6 +37,14 @@ public class UserService {
 			return userRepository.findByUsernameNot(user.getUsername(), page);
 		}
 		return userRepository.findAll(page);
+	}
+
+	public User getByUsername(String username) {
+		User inDB = userRepository.findByusername(username);
+		if (inDB == null) {
+			throw new NotFoundException();
+		}
+		return inDB;
 	}
 
 // Projection yontemi

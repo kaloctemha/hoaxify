@@ -22,3 +22,7 @@ export const setAuthorizationHeader = ({ username, password }) => {
     console.log('authHeaderValue',authHeaderValue);
     axios.defaults.headers['Authorization'] = authHeaderValue;
 }
+
+export const getUser = (username) => {
+    return axios.get(`/api/1.0/users/${username}`);
+}
